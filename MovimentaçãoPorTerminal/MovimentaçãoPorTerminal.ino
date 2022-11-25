@@ -6,7 +6,7 @@
 
 #define maxValue 255
 #define minValue 0 
-#define stoped 127
+#define stoped 125
 #define increment 5 // Define a velocidade de incremento do PWM
 
 void setup()
