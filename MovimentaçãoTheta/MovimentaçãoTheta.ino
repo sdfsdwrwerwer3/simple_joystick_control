@@ -1,7 +1,5 @@
 #include <stdlib.h> // biblioteca para incluir as variáveis com definição de tamanho em bits
 
-#define potx A0 // Potenciômetro X
-#define poty A1 // Potenciômetro Y
 #define axisx 5 // Eixo X
 #define axisy 6 // Eixo Y
 
