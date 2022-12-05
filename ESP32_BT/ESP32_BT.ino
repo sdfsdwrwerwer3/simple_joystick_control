@@ -7,12 +7,12 @@ BluetoothSerial ESP_BT;
 #define axisy 6 // Eixo Y
 #define horn 7  // Sirene
 
-#define maxValue 255
-#define minValue 0
-#define stoped 125
-#define deadZone 15
+#define maxValue 255 // Valor Máximo dos eixos
+#define minValue 0   // Valor Mínimo dos eixos
+#define stoped 125  
+#define deadZone 15 //Aumentar caso o theta não esteja andando em velocidade baixa
 
-uint16_t vel = 50;
+uint16_t vel = 50; 
 uint16_t vel_pos;
 uint16_t vel_neg;
 
@@ -62,6 +62,15 @@ void loop()
             analogWrite(axisx, stoped);
             analogWrite(axisy, stoped);
         }
+
+        /*
+        os comandos de deslocamento na diagonal utilizão comandos especificos ainda não implementados
+        comandos de deslocamento diagonal:
+            -> G frente esquerda
+            -> I frente direita
+            -> H trás esquerda
+            -> J trás direita
+        */
 
         // Buzina
         else if (comando == "V")
@@ -117,6 +126,12 @@ void loop()
         else if (comando == "q")
         {
             vel = 100;
+        }
+        else
+        {
+            analogWrite(axisx, stoped);
+            analogWrite(axisy, stoped);
+            //botão foi solto ou comando desconhecido
         }
         
     }
