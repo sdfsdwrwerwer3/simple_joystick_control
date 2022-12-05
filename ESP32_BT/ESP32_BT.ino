@@ -12,6 +12,10 @@ BluetoothSerial ESP_BT;
 #define stoped 125
 #define deadZone 15
 
+uint16_t vel = 50;
+uint16_t vel_pos;
+uint16_t vel_neg;
+
 void setup()
 {
     pinMode(axisx, OUTPUT);
@@ -29,9 +33,8 @@ void loop()
         String comando = ESP_BT.readString(); // le os dados
         //Serial.println(comando);              // mostra no monitor serial
 
-        uint16_t vel = 50;
-        uint16_t vel_pos = map(veldeadZone, 0, 100, stoped+deadZone, maxValue);
-        uint16_t vel_neg = map(vel, 0, 100, minValue, stoped-deadZone);
+        vel_pos = map(veldeadZone, 0, 100, stoped+deadZone, maxValue);
+        vel_neg = map(vel, 0, 100, minValue, stoped-deadZone);
 
         //deslocamento
         if (comando == "F")
