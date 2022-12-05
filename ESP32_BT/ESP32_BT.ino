@@ -33,8 +33,8 @@ void loop()
         String comando = ESP_BT.readString(); // le os dados
         //Serial.println(comando);              // mostra no monitor serial
 
-        vel_pos = map(veldeadZone, 0, 100, stoped+deadZone, maxValue);
-        vel_neg = map(vel, 0, 100, minValue, stoped-deadZone);
+        vel_pos = map(vel, 0, 100, stoped+deadZone, maxValue);
+        vel_neg = map(vel, 0, 100, stoped-deadZone, minValue);
 
         //deslocamento
         if (comando == "F")
