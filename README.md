@@ -1,6 +1,15 @@
 # simple_joystick_control
 
-TENSÃO      - BITS - OBS	
-3,55        - 195  - valor de tensão máxima
-[2,0 ~ 2,3] - 135  - valor de tensão média
-1,15        - 75   - valor de tensão mínimo
+tldr: 
+- 140 center point for both
+- y:	90 & 190 has same speed for turning left/right
+
+- x:	80  fast back | 100 slow back
+			180 slow front | 200 fast front
+
+
+channel_y(frete)
+80 - 120 | 165 - 205
+
+channel_x(ladin)
+65 - 120 | 160 - 200
