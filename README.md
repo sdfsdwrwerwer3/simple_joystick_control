@@ -2,14 +2,14 @@
 
 tldr: 
 - 140 center point for both
-- y:	90 & 190 has same speed for turning left/right
+- x:	90 & 190 has same speed for turning left/right
 
-- x:	80  fast back | 100 slow back
-			180 slow front | 200 fast front
+- y:	85  fast back | 100 slow back
+			180 slow front | 205 fast front
 
 
 channel_y(frete)
-80 - 120 | 165 - 205
+85 - 125 | 160 - 205
 
 channel_x(ladin)
-65 - 120 | 160 - 200
+70 - 125 | 155 - 200
