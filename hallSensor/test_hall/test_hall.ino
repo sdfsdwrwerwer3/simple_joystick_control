@@ -1,16 +1,7 @@
-/*
-insert summary here
-*/
-
-
 // motor - only for simulating
 int enB = 17;
 int in4 = 16;
 int in3 = 4;
-
-const int freq = 30000;
-const int pwmChannel = 0;
-const int resolution = 8;
 
 int potPin = 15;
 int potValue;
@@ -33,8 +24,6 @@ struct Hall {
 
 Hall ALeftHall = { 22, true, 0, 0 };
 Hall BLeftHall = { 23, true, 0, 0 };
-// Hall ARightHall = { 1, true, 0, 0 };
-// Hall BRightHall = { 3, true, 0, 0 };
 
 
 // variables - change radius and stoppedTime accordingly
@@ -54,34 +43,22 @@ void IRAM_ATTR leftMotorISR(Hall* hall) {  //IRAM_ATTR to run on RAM
   hall->endPulse = !hall->endPulse;
 }
 
-// void IRAM_ATTR rightMotorISR(Hall* hall) {
-//   ARightHall.timeStart = BRightHall.timeEnd;
-//   BRightHall.timeEnd = ARightHall.timeEnd;
-//   ARightHall.timeEnd = micros();
-
-//   hall->endPulse = !hall->endPulse;
-// }
-
 void setup() {
   // only for simulating
   pinMode(enB, OUTPUT);
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
-  ledcSetup(pwmChannel, freq, resolution);
-  ledcAttachPin(enB, pwmChannel);
   analogWrite(enB, 90);
   pinMode(potPin, INPUT);
 
 
   Serial.begin(9600);
 
-  // pinMode(Xchannel, OUTPUT);
+  pinMode(Xchannel, OUTPUT);
   pinMode(Ychannel, OUTPUT);
 
   pinMode(ALeftHall.pin, INPUT_PULLUP);
   pinMode(BLeftHall.pin, INPUT_PULLUP);
-  // pinMode(ARightHall.pin, INPUT_PULLUP);
-  // pinMode(BRightHall.pin, INPUT_PULLUP);
 
   attachInterrupt(
     digitalPinToInterrupt(ALeftHall.pin), [] {
@@ -93,17 +70,6 @@ void setup() {
       leftMotorISR(&BLeftHall);
     },
     FALLING);
-
-  // attachInterrupt(
-  //   digitalPinToInterrupt(ARightHall.pin), [] {
-  //     rightMotorISR(&ARightHall);
-  //   },
-  //   FALLING);
-  // attachInterrupt(
-  //   digitalPinToInterrupt(BRightHall.pin), [] {
-  //     rightMotorISR(&BRightHall);
-  //   },
-  //   FALLING);
 }
 
 void loop() {
@@ -111,17 +77,15 @@ void loop() {
   controlMotor();
 
   speedWheel(&ALeftHall, &BLeftHall);
-  // speedWheel(&ARightHall, &BRightHall);
 }
 
 void writeToJoystick() {
   // only for simulating
   potValue = analogRead(potPin) / 16;
-  Yvalue = potValue;
+  // Serial.println(potValue);
 
-
-  // dacWrite(Xchannel, Xvalue);
-  dacWrite(Ychannel, Yvalue);
+  dacWrite(Xchannel, 127);
+  dacWrite(Ychannel, potValue);
 }
 
 void controlMotor() {
